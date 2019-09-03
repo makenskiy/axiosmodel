@@ -38,7 +38,7 @@
   "opts": {
     "template": "node_modules/tui-jsdoc-template",
     "encoding": "utf8",
-    "destination": "./jsdoc/",
+    "destination": "./docs/",
     "recurse": true,
     "readme": "README.md",
     "tutorials": "./tutorials/"
