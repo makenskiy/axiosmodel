@@ -81,11 +81,49 @@ Wrap class your response for get/set fields and CRUD operations (REST API).</p>
 <li>Method cache (Cache-Control)</li>
 </ul>
 <h2>Install</h2>
-<pre><code>npm i AxiosModel
+<pre class="prettyprint source lang-bash"><code>npm i @makenskiy/axiosmodel
 </code></pre>
+<h2>Params setting</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>generateProperty</td>
+<td>Boolean</td>
+<td>No</td>
+<td>Auto generation properties base &quot;_data&quot;</td>
+</tr>
+<tr>
+<td>base</td>
+<td>String</td>
+<td>Yes</td>
+<td>API domain</td>
+</tr>
+<tr>
+<td>path</td>
+<td>String</td>
+<td>Yes</td>
+<td>API Endpoint</td>
+</tr>
+<tr>
+<td>properties</td>
+<td>Object</td>
+<td>No</td>
+<td>Default properties model</td>
+</tr>
+</tbody>
+</table>
 <h2>Include you project</h2>
-<p>import { AxiosModel } from 'AxiosModel'</p>
-<pre><code>// Settings
+<pre class="prettyprint source lang-js"><code>import { CreateModel } from '@makenskiy/axiosmodel'
+
+// Settings
 const  PARAMS  = {
    generateProperty:  true,
    base:  'https://reqres.in/api',
@@ -100,24 +138,36 @@ const  PARAMS  = {
 
 // Create model class
 class  PersonModel extends CreateModel {
-	constructor(data = {}) {
-		super();
-		this._data = data;
-	}
+    constructor(data = {}) {
+    	super();
+    	this._data = data; // required
+    }
 
-	static get _opts() {
-		return PARAMS;
-	}
+    // required
+    static get _opts() {
+    	return PARAMS;
+    }
 
-	get name() {
-		return `${this._data.first_name} ${this._data.last_name}`;
-	}
+    // Add custom property (optional)
+    get name() {
+    	return `${this._data.first_name} ${this._data.last_name}`;
+    }
 
-	set name({first_name, last_name}) {
-		this._data.first_name = first_name;
-		this._data.last_name = last_name;
-	}
+    set name({first_name, last_name}) {
+			this._data.first_name = first_name;
+			this._data.last_name = last_name;
+		}
 };
+</code></pre>
+<p>Example. Get array response. See documentation for use more methods</p>
+<pre class="prettyprint source lang-js"><code> // GET https://reqres.in/api/users?foo=bar
+  PersonModel.list({ foo: 'bar' }).then(res => {
+    console.log('list', res)
+  }, err => {
+    console.err('err list', err)
+  }).finally(() => {
+    console.log('loading state', PersonModel.loading) // for your app
+  })
 </code></pre>
 <h2>Documentation</h2>
 <p><a href="https://makenskiy.github.io/axiosmodel/">makenskiy.github.io/axiosmodel</a></p></article>

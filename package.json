@@ -1,8 +1,8 @@
 {
-  "name": "axiosmodel",
-  "version": "1.0.0",
+  "name": "@makenskiy/axiosmodel",
+  "version": "1.0.1",
   "description": "Axios model",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "webpack --mode production && cp dist/index.html tutorials/index.html && cp dist/index.js tutorials/index.js && npm run jsdoc",
     "dev": "webpack-dev-server --open",
