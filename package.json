@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:makenskiy/axiosmodel.git"
+    "url": "https://github.com/makenskiy/axiosmodel.git"
   },
   "author": "Makenskiy Viktor",
   "license": "MIT",

@@ -23,7 +23,7 @@ Wrap class your response for get/set fields and CRUD operations (REST API).
 
 ## Include you project
 
-    import { AxiosModel } from 'AxiosModel'
+  import { AxiosModel } from 'AxiosModel'
 
 	// Settings
     const  PARAMS  = {
@@ -58,3 +58,8 @@ Wrap class your response for get/set fields and CRUD operations (REST API).
 			this._data.last_name = last_name;
 		}
 	};
+
+
+## Documentation
+
+[makenskiy.github.io/axiosmodel](https://makenskiy.github.io/axiosmodel/)
