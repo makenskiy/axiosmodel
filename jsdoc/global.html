@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Global | Global</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
+
+    
+</head>
+<body>
+<nav class="lnb" id="lnb">
+    <div class="logo" style="">
+        
+            <img src="img/toast-ui.png" width="100%" height="100%">
+        
+    </div>
+    <div class="title">
+        <h1><a href="index.html" class="link">Global</a></h1>
+        
+    </div>
+    <div class="search-container" id="search-container">
+        <input type="text" placeholder="Search">
+        <ul></ul>
+    </div>
+    
+        <ol class="lnb-tab">
+            <li id="api-tab">
+                <a href="#"><h4>API</h4></a>
+            </li>
+            <li id="examples-tab">
+                <a href="#"><h4>Examples</h4></a>
+            </li>
+        </ol>
+    
+    <div class="lnb-examples hidden"><h3>Examples</h3><ul><li><a href="tutorial-index_.html">index</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="index_sub"></div></li></ul></div><div class="lnb-api hidden"><h3>Classes</h3><ul><li><a href="AxiosModel.html">AxiosModel</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="AxiosModel_sub"></div></li></ul></div><div class="lnb-api hidden"><h3>Global</h3><ul><li><a href="global.html#cache">cache</a></li><li><a href="global.html#create">create</a></li><li><a href="global.html#delete">delete</a></li><li><a href="global.html#get">get</a></li><li><a href="global.html#headers">headers</a></li><li><a href="global.html#list">list</a></li><li><a href="global.html#update">update</a></li></ul></div>
+</nav>
+<div id="resizer"></div>
+
+<div class="main" id="main">
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>Global</h2>
+    
+</header>
+
+<article>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        <dl>
+                
+
+<dt>
+    
+        <h4 class="name" id="cache">
+            
+                <span class="type-signature"></span>cache<span class="signature">(status)</span><span class="type-signature"></span>
+                
+            
+            <div class="container-source members">
+                <code><a href="Model.js.html">Model.js</a></code>,
+                <code><a href="Model.js.html#line386">line 386</a></code>
+            </div>
+            
+        </h4>
+
+        
+        <p class="summary">Add/Delete cache header to request.</p>
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Add/Delete cache header to request
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>status</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">add Cache-Control or delete</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+
+- <a href="CreateModel.html">CreateModel</a> - CreateModel this
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>PersonModel.cache().get({ id: 1 }).then(res => {
+  console.log('cache', res)
+  PersonModel.cache(true)
+})</code></pre>
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="create">
+            
+                <span class="type-signature"></span>create<span class="signature">(params<span class="signature-attributes">opt</span>, fields, cb)</span><span class="type-signature"> &rarr; {promise}</span>
+                
+            
+            <div class="container-source members">
+                <code><a href="Model.js.html">Model.js</a></code>,
+                <code><a href="Model.js.html#line455">line 455</a></code>
+            </div>
+            
+        </h4>
+
+        
+        <p class="summary">Method API (Create object).</p>
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Method API (Create object)
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    {}
+                
+                </td>
+            
+
+            <td class="description last">body</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>fields</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">update fields</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cb</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">return all response</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">promise</span>
+
+
+
+
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>// Create model PersonModel
+let model = new PersonModel()
+
+// Example create 1
+model._data.first_name = 'asdasdsd'
+
+model.create().then(res => {
+  console.log('create', res)
+})
+
+// Example create 2
+model.create({
+ first_name: 'asdasdsd'
+}).then(res => {
+  console.log('create', res)
+})
+
+// Example create 3 (only first_name)
+model.create({
+ first_name: 'asdasdsd',
+ last_name: 'asdasdsd'
+}, ['first_name']).then(res => {
+  console.log('create', res)
+})</code></pre>
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="delete">
+            
+                <span class="type-signature"></span>delete<span class="signature">(cb)</span><span class="type-signature"> &rarr; {promise}</span>
+                
+            
+            <div class="container-source members">
+                <code><a href="Model.js.html">Model.js</a></code>,
+                <code><a href="Model.js.html#line467">line 467</a></code>
+            </div>
+            
+        </h4>
+
+        
+        <p class="summary">Method API (Delete object).</p>
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Method API (Delete object)
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>cb</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">return all response</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">promise</span>
+
+
+
+
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="get">
+            
+                <span class="type-signature"></span>get<span class="signature">(params, cb)</span><span class="type-signature"> &rarr; {promise}</span>
+                
+            
+            <div class="container-source members">
+                <code><a href="Model.js.html">Model.js</a></code>,
+                <code><a href="Model.js.html#line336">line 336</a></code>
+            </div>
+            
+        </h4>
+
+        
+        <p class="summary">Method API (single object).</p>
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Method API (single object)
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">id dequired prop. this object query string params, expamle { id: 4, foo: 'bar' }</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cb</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">callback return all response</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">promise</span>
+
+
+
+
+
+- - Class wraped response data
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>// Get single object
+PersonModel.get({ id: 4 }).then(res => {
+  console.log('get', res)
+}, err => {
+  console.err('err get', err)
+}).finally(() => {
+  console.log('loading state', PersonModel.loading) // for your app
+})
+
+// Get single object
+PersonModel.get({ id: 4, foo: 'bar' }).then(res => {
+  console.log('get', res)
+}, err => {
+  console.err('err get', err)
+}).finally(() => {
+  console.log('loading state', PersonModel.loading) // for your app
+})</code></pre>
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="headers">
+            
+                <span class="type-signature"></span>headers<span class="signature">(headers)</span><span class="type-signature"></span>
+                
+            
+            <div class="container-source members">
+                <code><a href="Model.js.html">Model.js</a></code>,
+                <code><a href="Model.js.html#line410">line 410</a></code>
+            </div>
+            
+        </h4>
+
+        
+        <p class="summary">Add headers to request.</p>
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Add headers to request. WARN, it`s global add axios
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>headers</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">{ key: 'value' }</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+
+- <a href="CreateModel.html">CreateModel</a> - CreateModel this
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>// Add custom headers
+PersonModel.headers({
+  Authorization: 'Bearer token'
+})
+
+// Delete all custom headers
+PersonModel.headers(null, true)</code></pre>
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="list">
+            
+                <span class="type-signature"></span>list<span class="signature">(query, cb)</span><span class="type-signature"> &rarr; {promise}</span>
+                
+            
+            <div class="container-source members">
+                <code><a href="Model.js.html">Model.js</a></code>,
+                <code><a href="Model.js.html#line368">line 368</a></code>
+            </div>
+            
+        </h4>
+
+        
+        <p class="summary">Method API (Array object).</p>
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Method API (Array object)
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>query</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">this object query string params, expamle { foo: 'bar' }</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cb</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">callback return all response</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">promise</span>
+
+
+
+
+
+- - Class wraped response data
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>// Get array list objects
+PersonModel.list().then(res => {
+  console.log('list', res)
+}, err => {
+  console.err('err list', err)
+}).finally(() => {
+  console.log('loading state', PersonModel.loading) // for your app
+})
+
+// Get response information &amp;&amp; string params to request
+PersonModel.list({ foo: 'bar' }, response => {
+  console.log('response', response)
+}).then(res => {
+  console.log('list', res)
+}, err => {
+  console.err('err list', err)
+}).finally(() => {
+  console.log('loading state', PersonModel.loading) // for your app
+})</code></pre>
+
+    
+
+</dd>
+
+            
+                
+
+<dt>
+    
+        <h4 class="name" id="update">
+            
+                <span class="type-signature"></span>update<span class="signature">(params<span class="signature-attributes">opt</span>, fields, cb)</span><span class="type-signature"> &rarr; {promise}</span>
+                
+            
+            <div class="container-source members">
+                <code><a href="Model.js.html">Model.js</a></code>,
+                <code><a href="Model.js.html#line512">line 512</a></code>
+            </div>
+            
+        </h4>
+
+        
+        <p class="summary">Method API (Update object).</p>
+        
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        Method API (Update object)
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-params">
+        <h5>Parameters:</h5>
+        
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    this._data
+                
+                </td>
+            
+
+            <td class="description last">Object model, example DEMO_USER</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>fields</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">apdate fields, example ['foo', 'bar']</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cb</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">callback return all response</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">promise</span>
+
+
+
+
+
+
+
+
+            
+    </div>
+    
+
+    
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+    
+        <h5>Example</h5>
+        
+    <pre class="prettyprint"><code>// Create model
+let model = new PersonModel(DEMO_USER)
+
+// Example update 1 (only field last_name)
+model.update({
+  last_name: 'aasdsad'
+  first_name: 'Eve'
+}, ['last_name']).then(res => {
+  console.log('update by field', res) // updated last_name
+}).finally(() => {
+  console.log('loading state', PersonModel.loading) // for your app
+})
+
+// Example update 2
+model._data.last_name = 'aasdsad'
+
+model.update().then(res => {
+  console.log('update by field', res) // all updated
+}).finally(() => {
+  console.log('loading state', PersonModel.loading) // for your app
+})
+
+// Example update 3
+model.update({
+  last_name: 'aasdsad',
+  first_name: 'aasdsad',
+  ...DEMO_USER
+}).then(res => {
+  console.log('update by field', res) // all updated
+}).finally(() => {
+  console.log('loading state', PersonModel.loading) // for your app
+})</code></pre>
+
+    
+
+</dd>
+
+            </dl>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<footer>
+    <img class="logo" src="img/toast-ui.png" style="">
+    <div class="footer-text">NHN Entertainment. Frontend Development Lab</div>
+</footer>
+<script>prettyPrint();</script>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/tui-doc.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+    <script>
+        var id = '_sub'.replace(/"/g, '_');
+        var selectedApi = document.getElementById(id); // do not use jquery selector
+        var $selectedApi = $(selectedApi);
+
+        $selectedApi.removeClass('hidden');
+        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        showLnbApi();
+    </script>
+
+</body>
+</html>
