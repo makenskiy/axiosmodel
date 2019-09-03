@@ -1,0 +1,46 @@
+{
+  "plugins": [
+    "plugins/summarize"
+  ],
+  "recurseDepth": 10,
+  "source": {
+    "include": ["src"],
+    "includePattern": ".+.js(doc)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "sourceType": "module",
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc", "closure"]
+  },
+  "templates": {
+    "logoFile": "",
+    "cleverLinks": false,
+    "monospaceLinks": false,
+    "dateFormat": "ddd MMM Do YYYY",
+    "outputSourceFiles": true,
+    "outputSourcePath": true,
+    "systemName": "Documentation",
+    "footer": "",
+    "copyright": "Copyright 2019 makenskiy.com",
+    "navType": "vertical",
+    "theme": "cosmo",
+    "linenums": true,
+    "collapseSymbols": false,
+    "inverseNav": true,
+    "protocol": "html://",
+    "methodHeadingReturns": false
+  },
+  "markdown": {
+    "parser": "gfm",
+    "hardwrap": true
+  },
+  "opts": {
+    "template": "node_modules/tui-jsdoc-template",
+    "encoding": "utf8",
+    "destination": "./jsdoc/",
+    "recurse": true,
+    "readme": "README.md",
+    "tutorials": "./tutorials/"
+  }
+}

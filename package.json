@@ -1,0 +1,34 @@
+{
+  "name": "axiosmodel",
+  "version": "1.0.0",
+  "description": "Axios model",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production && cp dist/index.html tutorials/index.html && cp dist/index.js tutorials/index.js && npm run jsdoc",
+    "dev": "webpack-dev-server --open",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "jsdoc": "rm -rf dist/jsdoc && node_modules/.bin/jsdoc --configure jsdoc.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:makenskiy/axiosmodel.git"
+  },
+  "author": "Makenskiy Viktor",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "babel-loader": "^8.0.6",
+    "html-webpack-plugin": "^3.2.0",
+    "jsdoc": "^3.6.3",
+    "terser-webpack-plugin": "^1.4.1",
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.4.1",
+    "tui-jsdoc-template": "^1.2.2"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "lodash": "^4.17.11"
+  }
+}

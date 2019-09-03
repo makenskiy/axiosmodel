@@ -1,0 +1,263 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Axiosmodel</title>
+
+        <style>
+            html,body{
+              background-color: #eee;
+            }
+            .container {
+              display: flex;
+            }
+            .col-1,
+            .col-2 {
+              background-color: #fff;
+              border-radius: 5px;
+            }
+            .col-1 {
+              flex-basis: 300px;
+              padding: 20px;
+              margin-right: 20px;
+            }
+            .col-2 {
+              flex-basis: 100%;
+              padding: 20px;
+            }
+            .mb-2 {
+              margin-bottom: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+          <h2>Example request to API</h2>
+          <div class="mb-2">See browser console and network request</div>
+        </div>
+        <div class="container">
+          <div class="col-1">
+            <div>
+              <h2>List</h2>
+              <button id="js-handle-list">Get data</button>
+            </div>
+            <div>
+              <h2>Get on</h2>
+              <button id="js-handle-get">Get data</button>
+            </div>
+            <div>
+              <h2>Update fields</h2>
+              <button id="js-handle-update">Update data</button>
+            </div>
+            <div>
+              <h2>Create</h2>
+              <button id="js-handle-create">Create data</button>
+            </div>
+            <div>
+              <h2>Delete</h2>
+              <button id="js-handle-delete">Delete data</button>
+            </div>
+            <div>
+              <h2>Cache</h2>
+              <button id="js-handle-cache">No-cache data</button>
+            </div>
+            <div>
+              <h2>Add custom headers</h2>
+              <button id="js-handle-headers">Add header - Authorization</button>
+            </div>
+            <div>
+              <h2>Delete all custom headers</h2>
+              <button id="js-handle-headers-delete">Delete header - Authorization</button>
+            </div>
+            <div>
+              <h2>ResponseTypes</h2>
+              <button id="js-handle-responseTypes">Set blob</button>
+            </div>
+          </div>
+          <div class="col-2">
+<h2 id="js-res-h"></h2>
+<pre><code id="js-res"></code></pre>
+          </div>
+        </div>
+
+        <script type="text/javascript">
+            const { CreateModel } = AxiosModel // or require
+
+            const DEMO_USER = {
+              id: 4,
+              last_name: 'Holt',
+              first_name: 'Eve',
+              email: 'eve.holt@reqres.in',
+              avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/marcoramires/128.jpg'
+            };
+
+            const PARAMS = {
+              generateProperty: true,
+              base: 'https://reqres.in/api',
+              path: '/users',
+              properties: {
+                avatar: '',
+                email: '',
+                last_name: '',
+                first_name: ''
+              }
+            };
+
+            class PersonModel extends CreateModel {
+              constructor(data = {}) {
+                super();
+                this._data = data;
+              }
+
+              static get _opts() {
+                return PARAMS;
+              }
+
+              get name() {
+                return this._data.first_name + ' ' + this._data.last_name
+              }
+
+              set name({first_name, last_name}) {
+                this._data.first_name = first_name
+                this._data.last_name = last_name
+              }
+            };
+
+            var resEl = document.getElementById('js-res')
+            var resHel = document.getElementById('js-res-h')
+
+            function inner(res) {
+              let result
+
+              if (res.status) result = res
+
+              if (res.constructor.name == 'Array' && !res.status) {
+                result = res.map(el => {
+                  let obj = {
+                    _data: el._data,
+                    _proto_: {}
+                  }
+                  Object.getOwnPropertyNames(el).forEach(item => {
+                    if (item !== '_data') {
+                      obj['get ' + item] = el[item] // Object.getOwnPropertyDescriptor(res, item).get
+                      obj['set ' + item] = '(val) => {...}'
+                    }
+                  })
+
+                  Object.getOwnPropertyNames(el.__proto__.__resource).forEach(item => {
+                    obj._proto_[item] = '(arg) => (Promise)'
+                  })
+
+                  return obj
+                })
+              }
+
+              if (res.constructor.name === 'PersonModel' && !res.status) {
+                result = {
+                  _data: res._data,
+                  _proto_: {}
+                }
+
+                Object.getOwnPropertyNames(res).forEach(item => {
+                  if (item !== '_data') {
+                    result['get ' + item] = res[item] // Object.getOwnPropertyDescriptor(res, item).get
+                    result['set ' + item] = '(val) => {...}'
+                  }
+                })
+
+                Object.getOwnPropertyNames(res.__proto__.__resource).forEach(item => {
+                  result._proto_[item] = '(arg) => (Promise)'
+                })
+              }
+
+              resEl.innerHTML = JSON.stringify(result, null, 4)
+              resHel.innerHTML = res.constructor.name
+            }
+
+            document.getElementById('js-handle-list').addEventListener('click', () => {
+              PersonModel.list().then(res => {
+                console.log('list', res)
+                inner(res)
+              })
+            });
+
+            document.getElementById('js-handle-get').addEventListener('click', () => {
+              PersonModel.get({ id: 4 }).then(res => {
+                console.log('get', res)
+                inner(res)
+              })
+            });
+
+            document.getElementById('js-handle-update').addEventListener('click', () => {
+              let model = new PersonModel(DEMO_USER)
+
+              model.update().then(res => {
+                console.log('update all field', res)
+                inner(res)
+              })
+            });
+
+            document.getElementById('js-handle-create').addEventListener('click', () => {
+              let model = new PersonModel()
+
+              model._data.first_name = 'asdasdsd'
+
+              model.create().then(res => {
+                console.log('create', res)
+                inner(res)
+              })
+            });
+
+            document.getElementById('js-handle-delete').addEventListener('click', () => {
+              let model = new PersonModel(DEMO_USER)
+
+              model._data.first_name = 'asdasdsd'
+
+              model.delete().then(res => {
+                console.log('delete', res)
+                inner(res)
+              })
+            });
+
+            document.getElementById('js-handle-cache').addEventListener('click', () => {
+              PersonModel.cache().get({ id: 1 }).then(res => {
+                console.log('cache', res)
+                inner(res)
+                PersonModel.cache(true)
+              })
+            });
+
+            document.getElementById('js-handle-headers').addEventListener('click', () => {
+              PersonModel.headers({
+                Authorization: 'Bearer token'
+              })
+
+              PersonModel.get({ id: 1 }, res => {
+                console.log('headers', res)
+              }).then(res => {
+                inner(res)
+                PersonModel.cache(true)
+              })
+            });
+
+            document.getElementById('js-handle-headers-delete').addEventListener('click', () => {
+              PersonModel.headers(null, true)
+
+              PersonModel.get({ id: 1 }, res => {
+                inner(res)
+                console.log('headers', res)
+              })
+            });
+
+            document.getElementById('js-handle-responseTypes').addEventListener('click', () => {
+              PersonModel.get({ id: 1, config: {
+                responseType: 'blob'
+              } }, res => {
+                inner(res)
+                console.log('headers', res.data)
+              })
+            });
+        </script>
+    </body>
+</html>
