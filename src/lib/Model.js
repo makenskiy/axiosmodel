@@ -50,11 +50,11 @@ let parseResponse = function(response) {
 };
 
 /**
- * Axios Model
+ * Create Model
  *
  * @description Class for CRUD оperations and wrap response data
  * @export
- * @class AxiosModel
+ * @class CreateModel
  * @todo Create Method for extend base __resource(). Optimuze size build
  *
  * @example
@@ -163,6 +163,7 @@ export default class CreateModel {
    * Common CRUD methods
    *
    * @readonly
+   * @private
    * @static
    * @memberof CreateModel
    */
@@ -259,6 +260,7 @@ export default class CreateModel {
    * Call resource methods
    *
    * @static
+   * @private
    * @param {string} name - method name
    * @param {array} args - request arguments
    * @returns {promise} - current method

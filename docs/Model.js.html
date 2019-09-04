@@ -43,7 +43,7 @@
             </li>
         </ol>
     
-    <div class="lnb-examples hidden"><h3>Examples</h3><ul><li><a href="tutorial-index_.html">index</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="index_sub"></div></li></ul></div><div class="lnb-api hidden"><h3>Classes</h3><ul><li><a href="AxiosModel.html">AxiosModel</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="AxiosModel_sub"></div></li></ul></div><div class="lnb-api hidden"><h3>Global</h3><ul><li><a href="global.html#cache">cache</a></li><li><a href="global.html#create">create</a></li><li><a href="global.html#delete">delete</a></li><li><a href="global.html#get">get</a></li><li><a href="global.html#headers">headers</a></li><li><a href="global.html#list">list</a></li><li><a href="global.html#update">update</a></li></ul></div>
+    <div class="lnb-examples hidden"><h3>Examples</h3><ul><li><a href="tutorial-index_.html">index</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="index_sub"></div></li></ul></div><div class="lnb-api hidden"><h3>Classes</h3><ul><li><a href="CreateModel.html">CreateModel</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="CreateModel_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="CreateModel.html#.loading">loading</a></li><li><a href="CreateModel.html#.properties">properties</a></li></ul></div></li></ul></div><div class="lnb-api hidden"><h3>Global</h3><ul><li><a href="global.html#cache">cache</a></li><li><a href="global.html#create">create</a></li><li><a href="global.html#delete">delete</a></li><li><a href="global.html#get">get</a></li><li><a href="global.html#headers">headers</a></li><li><a href="global.html#list">list</a></li><li><a href="global.html#update">update</a></li></ul></div>
 </nav>
 <div id="resizer"></div>
 
@@ -107,11 +107,11 @@ let parseResponse = function(response) {
 };
 
 /**
- * Axios Model
+ * Create Model
  *
  * @description Class for CRUD оperations and wrap response data
  * @export
- * @class AxiosModel
+ * @class CreateModel
  * @todo Create Method for extend base __resource(). Optimuze size build
  *
  * @example
@@ -220,6 +220,7 @@ export default class CreateModel {
    * Common CRUD methods
    *
    * @readonly
+   * @private
    * @static
    * @memberof CreateModel
    */
@@ -316,6 +317,7 @@ export default class CreateModel {
    * Call resource methods
    *
    * @static
+   * @private
    * @param {string} name - method name
    * @param {array} args - request arguments
    * @returns {promise} - current method
