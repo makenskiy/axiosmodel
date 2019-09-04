@@ -4,7 +4,7 @@
   "description": "Axios model",
   "main": "dist/index.js",
   "scripts": {
-    "build": "webpack --mode production && cp dist/index.html tutorials/index.html && cp dist/index.js tutorials/index.js && npm run jsdoc",
+    "build": "./build.sh",
     "dev": "webpack-dev-server --open",
     "test": "echo \"Error: no test specified\" && exit 1",
     "jsdoc": "rm -rf dist/jsdoc && node_modules/.bin/jsdoc --configure jsdoc.json"

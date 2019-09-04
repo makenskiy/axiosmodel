@@ -163,7 +163,7 @@
     <pre class="prettyprint"><code>// Example PersonModel for test
 
 // Create class
-import { AxiosModel } from 'AxiosModel';
+import { CreateModel } from '@makenskiy/axiosmodel'
 
 // Test doc user
 const DEMO_USER = {
@@ -187,7 +187,7 @@ const PARAMS = {
   }
 };
 
-class PersonModel extends AxiosModel {
+class PersonModel extends CreateModel {
   constructor(data = {}) {
     super();
     this._data = data;
@@ -217,7 +217,9 @@ class PersonModel extends AxiosModel {
 // Request get (single data). @see <a href="global.html#get">get</a> for further information.
 // Request update (single data). @see <a href="global.html#update">update</a> for further information.
 // Request create (single data). @see <a href="global.html#create">create</a> for further information.
-// Request delete (single data). @see <a href="global.html#delete">delete</a> for further information.</code></pre>
+// Request delete (single data). @see <a href="global.html#delete">delete</a> for further information.
+// Method cache on/off. @see <a href="global.html#cache">cache</a> for further information.
+// Method add/remove headers. @see <a href="global.html#headers">headers</a> for further information.</code></pre>
 
     
 

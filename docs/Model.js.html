@@ -118,7 +118,7 @@ let parseResponse = function(response) {
  * // Example PersonModel for test
  *
  * // Create class
- * import { AxiosModel } from 'AxiosModel';
+ * import { CreateModel } from '@makenskiy/axiosmodel'
  *
  * // Test doc user
  * const DEMO_USER = {
@@ -142,7 +142,7 @@ let parseResponse = function(response) {
  *   }
  * };
  *
- * class PersonModel extends AxiosModel {
+ * class PersonModel extends CreateModel {
  *   constructor(data = {}) {
  *     super();
  *     this._data = data;
@@ -173,6 +173,8 @@ let parseResponse = function(response) {
  * // Request update (single data). @see {@link update} for further information.
  * // Request create (single data). @see {@link create} for further information.
  * // Request delete (single data). @see {@link delete} for further information.
+ * // Method cache on/off. @see {@link cache} for further information.
+ * // Method add/remove headers. @see {@link headers} for further information.
  */
 export default class CreateModel {
 	static get __class() {
