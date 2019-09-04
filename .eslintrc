@@ -1,0 +1,12 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["airbnb"],
+  "rules": {
+    "trailing-comma": 0,
+    "comma-dangle": 0,
+    "arrow-body-style": 0,
+    "no-underscore-dangle": 0,
+    "max-len": [1, 140, 2, {"ignoreComments": true}],
+    "import/prefer-default-export": 0
+  }
+}

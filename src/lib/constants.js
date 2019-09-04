@@ -1,7 +1,7 @@
-export const DEFAULTS = {
-	url: '',
-	params: {
-		id: ''
+export default {
+  url: '',
+  params: {
+    id: ''
   },
   loading: false,
   perPage: 25,

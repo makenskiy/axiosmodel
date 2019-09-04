@@ -17,7 +17,7 @@ export default (query) => {
   const queryExl = ['id', 'config'];
   return {
     query: pickBy(query, (value, key) => {
-      return !find(queryExl, item => item  === key);
+      return !find(queryExl, (item) => item === key);
     }),
     config: {
       ...query.config,

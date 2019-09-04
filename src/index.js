@@ -1,5 +1,1 @@
-import CreateModel from './lib/Model';
-
-export {
-  CreateModel
-};
+export { default as CreateModel } from './lib/Model';

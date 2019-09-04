@@ -14,11 +14,11 @@ import {
 } from 'lodash';
 
 import axios from 'axios';
-import { DEFAULTS } from './constants'
-import { ModelDataHandler, getPlainObject, parseQuery } from './utils'
+import DEFAULTS from './constants';
+import { ModelDataHandler, getPlainObject, parseQuery } from './utils';
 
-let RESOURCES = {};
-let OPTIONS = {};
+const RESOURCES = {};
+const OPTIONS = {};
 
 /**
  * Parse response helper
@@ -27,27 +27,25 @@ let OPTIONS = {};
  * @returns {@link __class} - return model
  * @private
  */
-let parseResponse = function(response) {
-  let body = get(response, this.__options ? this.__options.responsePath : this.__class.__options.responsePath);
+function parseResponse(response) {
+  const body = get(response, this.__options ? this.__options.responsePath : this.__class.__options.responsePath);
 
-	if (isArray(body)) {
-		return body.map(itemData => {
-      let item = new this.__class(itemData);
-
+  if (isArray(body)) {
+    return body.map((itemData) => {
+      const item = new this.__class(itemData);
       if ((this.__options ? this.__options.generateProperty : this.__class.__options.generateProperty) && (itemData && item)) {
         ModelDataHandler.bind(item)(itemData);
       }
-			return item;
-		});
-	} else {
-    let model = new this.__class(body);
-    if ((this.__options ? this.__options.generateProperty : this.__class.__options.generateProperty) && (model && body)) {
-      ModelDataHandler.bind(model)(body);
-    }
-
-    return model;
+      return item;
+    });
   }
-};
+
+  const model = new this.__class(body);
+  if ((this.__options ? this.__options.generateProperty : this.__class.__options.generateProperty) && (model && body)) {
+    ModelDataHandler.bind(model)(body);
+  }
+  return model;
+}
 
 /**
  * Create Model
@@ -120,8 +118,8 @@ let parseResponse = function(response) {
  * // Method add/remove headers. @see {@link headers} for further information.
  */
 export default class CreateModel {
-	static get __class() {
-		return this;
+  static get __class() {
+    return this;
   }
 
   /**
@@ -136,7 +134,7 @@ export default class CreateModel {
    * console.log(PersonModel.properties)
    */
   static get properties() {
-    return this.__options.properties || {}
+    return this.__options.properties || {};
   }
 
   /**
@@ -148,18 +146,18 @@ export default class CreateModel {
    * console.log(PersonModel.loading)
    */
   static get loading() {
-    return isBoolean(get(this.__options, 'loading')) ? this.__options.loading : this.__class.__options.loading
+    return isBoolean(get(this.__options, 'loading')) ? this.__options.loading : this.__class.__options.loading;
   }
 
   static set loading(val) {
     if (isBoolean(get(this.__options, 'loading'))) {
-      this.__options.loading = val
+      this.__options.loading = val;
     } else {
-      this.__class.__options.loading = val
+      this.__class.__options.loading = val;
     }
   }
 
-	/**
+  /**
    * Common CRUD methods
    *
    * @readonly
@@ -168,95 +166,98 @@ export default class CreateModel {
    * @memberof CreateModel
    */
   static get __resource() {
-		let name = this.name;
-		let resource = RESOURCES[name];
-		if (!resource) {
-      let url = `${this.__options.base || ''}${this.__options.path}`;
-      resource = RESOURCES[name] = {
-        // GET /path/to/:id
-        // GET /path/to?id=:id
-        // GET /path/to/:id?foo=bar&foo=bar
-        get: (arg) => {
-          const parse = parseQuery(arg);
-          return axios({
-            method: 'GET',
+    let resource = RESOURCES[this.name];
+    if (resource) {
+      return resource;
+    }
+
+    const url = `${this.__options.base || ''}${this.__options.path}`;
+    const config = {
+      // GET /path/to/:id
+      // GET /path/to?id=:id
+      // GET /path/to/:id?foo=bar&foo=bar
+      get: (arg) => {
+        const parse = parseQuery(arg);
+        return axios({
+          method: 'GET',
+          url: `${url}/${arg.id || arg._id || ''}`,
+          params: parse.query,
+          ...parse.config
+        });
+      },
+
+      // GET /path/to
+      // GET /path/to?foo=bar&foo=bar
+      list: (arg) => {
+        const parse = parseQuery(arg);
+        return axios({
+          method: 'GET',
+          url,
+          params: arg,
+          ...parse.config
+        });
+      },
+
+      // DELETE /path/to/:id
+      delete: (arg) => {
+        return axios({
+          method: 'DELETE',
+          url: `${url}/${arg.id || arg._id || ''}`
+        });
+      },
+
+      // PUT /path/to/:id { foo: 'bar' }
+      // PUT /path/to?id=:id { foo: 'bar' }
+      // PUT /path/to { id: :id, foo: 'bar' }
+      update: (arg) => {
+        const parse = parseQuery(arg);
+        return new Promise((resolve, reject) => {
+          axios({
+            method: 'PUT',
             url: `${url}/${arg.id || arg._id || ''}`,
-            params: parse.query,
+            data: parse.query,
             ...parse.config
-          })
-        },
+          }).then((res) => {
+            resolve({
+              ...res,
+              data: {
+                data: res.data
+              }
+            });
+          }, (err) => {
+            reject(err);
+          });
+        });
+      },
 
-        // GET /path/to
-        // GET /path/to?foo=bar&foo=bar
-        list: (arg) => {
-          const parse = parseQuery(arg);
-          return axios({
-            method: 'GET',
-            url: url,
-            params: arg,
+      // POST /path/to { foo: 'bar' }
+      create: (arg) => {
+        const parse = parseQuery(arg);
+        return new Promise((resolve, reject) => {
+          axios({
+            method: 'POST',
+            url,
+            data: parse.query,
             ...parse.config
-          })
-        },
-
-        // DELETE /path/to/:id
-        delete: (arg) => {
-          return axios({
-            method: 'DELETE',
-            url: `${url}/${arg.id || arg._id || ''}`
-          })
-        },
-
-        // PUT /path/to/:id { foo: 'bar' }
-        // PUT /path/to?id=:id { foo: 'bar' }
-        // PUT /path/to { id: :id, foo: 'bar' }
-        update: (arg) => {
-          const parse = parseQuery(arg);
-          return new Promise((resolve, reject) => {
-            axios({
-              method: 'PUT',
-              url: `${url}/${arg.id || arg._id || ''}`,
-              data: parse.query,
-              ...parse.config
-            }).then(res => {
-              resolve({
-                ...res,
-                data: {
-                  data: res.data
-                }
-              })
-            }, err => {
-              reject(err)
-            })
-          })
-        },
-
-        // POST /path/to { foo: 'bar' }
-        create: (arg) => {
-          const parse = parseQuery(arg);
-          return new Promise((resolve, reject) => {
-            axios({
-              method: 'POST',
-              url: url,
-              data: parse.query,
-              ...parse.config
-            }).then(res => {
-              resolve({
-                ...res,
-                data: {
-                  data: res.data
-                }
-              })
-            }, err => {
-              reject(err)
-            })
-          })
-        }
+          }).then((res) => {
+            resolve({
+              ...res,
+              data: {
+                data: res.data
+              }
+            });
+          }, (err) => {
+            reject(err);
+          });
+        });
       }
-		}
-		return resource;
-	}
+    };
+    resource = config;
+    RESOURCES[this.name] = config;
+    return config;
+  }
 
-	/**
+  /**
    * Call resource methods
    *
    * @static
@@ -267,48 +268,47 @@ export default class CreateModel {
    * @memberof CreateModel
    */
   static __method(name, ...args) {
-    let cb = last(args);
-		let opts = this.__class.__options;
-    let methodExtParams = get(opts, 'params', {})[name];
+    const cb = last(args);
+    const opts = this.__class.__options;
+    const methodExtParams = get(opts, 'params', {})[name];
 
-		if (opts && methodExtParams) {
-			let methodParams = args[0];
-			if (isPlainObject(methodParams)) extend(methodParams, methodExtParams);
+    if (opts && methodExtParams) {
+      const methodParams = args[0];
+      if (isPlainObject(methodParams)) extend(methodParams, methodExtParams);
     }
-    this.loading = true
-    return Promise.resolve(this.__resource[name](...args)) //
-			.then(response => {
-        if (isFunction(cb)) {
-          cb(response);
-        }
-        this.loading = false
-        if (find([200, 201], item => item === response.status)) {
-          return parseResponse.call(this, response);
-        } else {
-          return response
-        }
-			});
-	}
 
-	static get __options() {
-    let name = this.name;
-		return OPTIONS[name] || (OPTIONS[name] = extend({}, DEFAULTS, this._opts));
-	}
+    this.loading = true;
+    return Promise.resolve(this.__resource[name](...args)).then((response) => {
+      if (isFunction(cb)) cb(response);
+      this.loading = false;
+      if (find([200, 201], (item) => item === response.status)) {
+        return parseResponse.call(this, response);
+      // eslint-disable-next-line no-else-return
+      } else {
+        return response;
+      }
+    });
+  }
 
-	get __class() {
+  static get __options() {
+    // eslint-disable-next-line no-return-assign
+    return OPTIONS[this.name] || (OPTIONS[this.name] = extend({}, DEFAULTS, this._opts));
+  }
+
+  get __class() {
     return this.constructor;
-	}
+  }
 
-	get __resource() {
-		return this.__class.__resource;
-	}
+  get __resource() {
+    return this.__class.__resource;
+  }
 
-	__method(...args) {
-		return this.__class.__method.apply(this, args);
-	}
+  __method(...args) {
+    return this.__class.__method.apply(this, args);
+  }
 
-	__fieldsAll(fields) {
-		return isArray(fields) && fields.length ? fields : keys(this._data);
+  __fieldsAll(fields) {
+    return isArray(fields) && fields.length ? fields : keys(this._data);
   }
 
   /**
@@ -338,10 +338,10 @@ export default class CreateModel {
    * })
    */
   static get(params, cb) {
-		return this.__method('get', getPlainObject(params), cb);
-	}
+    return this.__method('get', getPlainObject(params), cb);
+  }
 
-	/**
+  /**
    * Method API (Array object)
    *
    * @static
@@ -370,12 +370,13 @@ export default class CreateModel {
    * })
    */
   static list(query, cb) {
-		query = getPlainObject(query);
-		if (!query['per-page']) query['per-page'] = this.__options.perPage;
-		return this.__method('list', extend({}, query), cb);
-	}
+    // eslint-disable-next-line prefer-const
+    let getQuery = getPlainObject(query);
+    if (!get(getQuery, 'per-page')) getQuery['per-page'] = this.__options.perPage;
+    return this.__method('list', extend({}, getQuery), cb);
+  }
 
-	/**
+  /**
    * Add/Delete cache header to request
    *
    * @static
@@ -388,15 +389,15 @@ export default class CreateModel {
    * })
    */
   static cache(status) {
-		if (!status) {
-			axios.defaults.headers.common['Cache-Control'] = 'no-cache';
-		} else {
-			delete axios.defaults.headers.common['Cache-Control'];
-		}
-		return this;
-	}
+    if (!status) {
+      axios.defaults.headers.common['Cache-Control'] = 'no-cache';
+    } else {
+      delete axios.defaults.headers.common['Cache-Control'];
+    }
+    return this;
+  }
 
-	/**
+  /**
    * Add headers to request. WARN, it`s global add axios
    *
    * @static
@@ -414,16 +415,18 @@ export default class CreateModel {
   static headers(headers = {}, del) {
     if (del) {
       each(axios.defaults.headers.common, (value, key) => {
-        if (key !== 'Accept') unset(axios.defaults.headers.common, key)
-      })
+        if (key !== 'Accept') unset(axios.defaults.headers.common, key);
+      });
       return this;
     }
 
-    each(headers, (value, key) => axios.defaults.headers.common[key] = String(value))
-		return this;
-	}
+    each(headers, (value, key) => {
+      axios.defaults.headers.common[key] = String(value);
+    });
+    return this;
+  }
 
-	/**
+  /**
    * Method API (Create object)
    *
    * @param {object} [params={}] - body
@@ -457,12 +460,12 @@ export default class CreateModel {
    * })
    */
   create(params = {}, fields, cb) {
-    params = Object.assign(params, this._data)
-    let patch = Object.assign(this.__class.properties, pick(params, this.__fieldsAll(fields)))
+    const query = Object.assign(params, this._data);
+    const patch = Object.assign(this.__class.properties, pick(query, this.__fieldsAll(fields)));
     return this.__method('create', patch, cb);
-	}
+  }
 
-	/**
+  /**
    * Method API (Delete object)
    *
    * @param {function} cb - return all response
@@ -470,9 +473,9 @@ export default class CreateModel {
    */
   delete(cb) {
     return this.__method('delete', { id: this._data.id }, cb);
-	}
+  }
 
-	/**
+  /**
    * Method API (Update object)
    *
    * @param {object} [params=this._data] - Object model, example DEMO_USER
@@ -514,7 +517,7 @@ export default class CreateModel {
    * })
    */
   update(params = this._data, fields, cb) {
-    let patch = pick(this._data, this.__fieldsAll(fields));
+    const patch = pick(this._data, this.__fieldsAll(fields));
     return this.__method('update', extend(getPlainObject({ id: this._data.id }), getPlainObject(params)), patch, cb);
-	}
-};
+  }
+}

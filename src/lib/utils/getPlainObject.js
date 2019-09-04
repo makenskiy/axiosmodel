@@ -8,6 +8,6 @@ import {
   isPlainObject
 } from 'lodash';
 
-export default function(value) {
-	return isPlainObject(value) ? value : {};
-};
+export default function (value) {
+  return isPlainObject(value) ? value : {};
+}
