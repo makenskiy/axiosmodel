@@ -90,8 +90,8 @@
                 
             
             <div class="container-source members">
-                <code><a href="Model.js.html">Model.js</a></code>,
-                <code><a href="Model.js.html#line391">line 391</a></code>
+                <code><a href="CreateModel.js.html">CreateModel.js</a></code>,
+                <code><a href="CreateModel.js.html#line392">line 392</a></code>
             </div>
             
         </h4>
@@ -235,7 +235,8 @@
     
         <h5>Example</h5>
         
-    <pre class="prettyprint"><code>PersonModel.cache().get({ id: 1 }).then(res => {
+    <pre class="prettyprint"><code>// WARNING: Add global config
+PersonModel.cache().get({ id: 1 }).then(res => {
   console.log('cache', res)
   PersonModel.cache(true)
 })</code></pre>
@@ -255,8 +256,8 @@
                 
             
             <div class="container-source members">
-                <code><a href="Model.js.html">Model.js</a></code>,
-                <code><a href="Model.js.html#line462">line 462</a></code>
+                <code><a href="CreateModel.js.html">CreateModel.js</a></code>,
+                <code><a href="CreateModel.js.html#line466">line 466</a></code>
             </div>
             
         </h4>
@@ -497,6 +498,8 @@
 let model = new PersonModel()
 
 // Example create 1
+model.first_name = 'asdasdsd'
+// or
 model._data.first_name = 'asdasdsd'
 
 model.create().then(res => {
@@ -513,7 +516,8 @@ model.create({
 // Example create 3 (only first_name)
 model.create({
  first_name: 'asdasdsd',
- last_name: 'asdasdsd'
+ last_name: 'asdasdsd',
+ foo: 'bar'
 }, ['first_name']).then(res => {
   console.log('create', res)
 })</code></pre>
@@ -533,8 +537,8 @@ model.create({
                 
             
             <div class="container-source members">
-                <code><a href="Model.js.html">Model.js</a></code>,
-                <code><a href="Model.js.html#line474">line 474</a></code>
+                <code><a href="CreateModel.js.html">CreateModel.js</a></code>,
+                <code><a href="CreateModel.js.html#line478">line 478</a></code>
             </div>
             
         </h4>
@@ -693,8 +697,8 @@ model.create({
                 
             
             <div class="container-source members">
-                <code><a href="Model.js.html">Model.js</a></code>,
-                <code><a href="Model.js.html#line340">line 340</a></code>
+                <code><a href="CreateModel.js.html">CreateModel.js</a></code>,
+                <code><a href="CreateModel.js.html#line340">line 340</a></code>
             </div>
             
         </h4>
@@ -899,8 +903,8 @@ PersonModel.get({ id: 4, foo: 'bar' }).then(res => {
                 
             
             <div class="container-source members">
-                <code><a href="Model.js.html">Model.js</a></code>,
-                <code><a href="Model.js.html#line415">line 415</a></code>
+                <code><a href="CreateModel.js.html">CreateModel.js</a></code>,
+                <code><a href="CreateModel.js.html#line416">line 416</a></code>
             </div>
             
         </h4>
@@ -1067,8 +1071,8 @@ PersonModel.headers(null, true)</code></pre>
                 
             
             <div class="container-source members">
-                <code><a href="Model.js.html">Model.js</a></code>,
-                <code><a href="Model.js.html#line372">line 372</a></code>
+                <code><a href="CreateModel.js.html">CreateModel.js</a></code>,
+                <code><a href="CreateModel.js.html#line372">line 372</a></code>
             </div>
             
         </h4>
@@ -1275,8 +1279,8 @@ PersonModel.list({ foo: 'bar' }, response => {
                 
             
             <div class="container-source members">
-                <code><a href="Model.js.html">Model.js</a></code>,
-                <code><a href="Model.js.html#line519">line 519</a></code>
+                <code><a href="CreateModel.js.html">CreateModel.js</a></code>,
+                <code><a href="CreateModel.js.html#line523">line 523</a></code>
             </div>
             
         </h4>

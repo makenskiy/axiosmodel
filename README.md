@@ -112,7 +112,11 @@ npm run build
 
 ## Run test
 ```bash
-npm run test
+// Build mode
+npm run unit:single
+
+// Dev mode
+npm run unit:watch
 ```
 
 ## Generate documentation

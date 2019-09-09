@@ -138,9 +138,8 @@ const  PARAMS  = {
 
 // Create model class
 class  PersonModel extends CreateModel {
-    constructor(data = {}) {
-    	super();
-    	this._data = data; // required
+    constructor(data) {
+    	super(data);
     }
 
     // required
@@ -170,7 +169,28 @@ class  PersonModel extends CreateModel {
   })
 </code></pre>
 <h2>Documentation</h2>
-<p><a href="https://makenskiy.github.io/axiosmodel/">makenskiy.github.io/axiosmodel</a></p></article>
+<p><a href="https://makenskiy.github.io/axiosmodel/">makenskiy.github.io/axiosmodel</a></p>
+<h1>Development</h1>
+<p>Development use</p>
+<h2>Install</h2>
+<pre class="prettyprint source lang-bash"><code>git clone https://github.com/makenskiy/axiosmodel.git && cd axiosmodel && npm i
+</code></pre>
+<h2>Run dev</h2>
+<pre class="prettyprint source lang-bash"><code>npm run dev
+</code></pre>
+<h2>Run build</h2>
+<pre class="prettyprint source lang-bash"><code>npm run build
+</code></pre>
+<h2>Run test</h2>
+<pre class="prettyprint source lang-bash"><code>// Build mode
+npm run unit:single
+
+// Dev mode
+npm run unit:watch
+</code></pre>
+<h2>Generate documentation</h2>
+<pre class="prettyprint source lang-bash"><code>npm run jsdoc
+</code></pre></article>
     </section>
 
 

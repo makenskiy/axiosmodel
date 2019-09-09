@@ -1,4 +1,61 @@
-import {
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Source: CreateModel.js | Source: CreateModel.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
+
+    
+</head>
+<body>
+<nav class="lnb" id="lnb">
+    <div class="logo" style="">
+        
+            <img src="img/toast-ui.png" width="100%" height="100%">
+        
+    </div>
+    <div class="title">
+        <h1><a href="index.html" class="link">Source: CreateModel.js</a></h1>
+        
+    </div>
+    <div class="search-container" id="search-container">
+        <input type="text" placeholder="Search">
+        <ul></ul>
+    </div>
+    
+        <ol class="lnb-tab">
+            <li id="api-tab">
+                <a href="#"><h4>API</h4></a>
+            </li>
+            <li id="examples-tab">
+                <a href="#"><h4>Examples</h4></a>
+            </li>
+        </ol>
+    
+    <div class="lnb-examples hidden"><h3>Examples</h3><ul><li><a href="tutorial-index_.html">index</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="index_sub"></div></li></ul></div><div class="lnb-api hidden"><h3>Classes</h3><ul><li><a href="CreateModel.html">CreateModel</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="CreateModel_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="CreateModel.html#.loading">loading</a></li><li><a href="CreateModel.html#.properties">properties</a></li></ul></div></li></ul></div><div class="lnb-api hidden"><h3>Global</h3><ul><li><a href="global.html#cache">cache</a></li><li><a href="global.html#create">create</a></li><li><a href="global.html#delete">delete</a></li><li><a href="global.html#get">get</a></li><li><a href="global.html#headers">headers</a></li><li><a href="global.html#list">list</a></li><li><a href="global.html#update">update</a></li></ul></div>
+</nav>
+<div id="resizer"></div>
+
+<div class="main" id="main">
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {
   isArray,
   isFunction,
   isBoolean,
@@ -33,7 +90,7 @@ function parseResponse(response) {
   if (isArray(body)) {
     return body.map((itemData) => {
       const item = new this.__class(itemData);
-      if ((this.__options ? this.__options.generateProperty : this.__class.__options.generateProperty) && (itemData && item)) {
+      if ((this.__options ? this.__options.generateProperty : this.__class.__options.generateProperty) &amp;&amp; (itemData &amp;&amp; item)) {
         ModelDataHandler.bind(item)(itemData);
       }
       return item;
@@ -41,7 +98,7 @@ function parseResponse(response) {
   }
 
   const model = new this.__class(body);
-  if ((this.__options ? this.__options.generateProperty : this.__class.__options.generateProperty) && (model && body)) {
+  if ((this.__options ? this.__options.generateProperty : this.__class.__options.generateProperty) &amp;&amp; (model &amp;&amp; body)) {
     ModelDataHandler.bind(model)(body);
   }
   return model;
@@ -179,7 +236,7 @@ export default class CreateModel {
     const config = {
       // GET /path/to/:id
       // GET /path/to?id=:id
-      // GET /path/to/:id?foo=bar&foo=bar
+      // GET /path/to/:id?foo=bar&amp;foo=bar
       get: (arg) => {
         const parse = parseQuery(arg);
         return axios({
@@ -191,7 +248,7 @@ export default class CreateModel {
       },
 
       // GET /path/to
-      // GET /path/to?foo=bar&foo=bar
+      // GET /path/to?foo=bar&amp;foo=bar
       list: (arg) => {
         const parse = parseQuery(arg);
         return axios({
@@ -281,7 +338,7 @@ export default class CreateModel {
       if (isFunction(cb)) cb(response);
       this.loading = false;
       if (find([200, 201], (item) => item === response.status)) {
-        if (name === 'update') set(response, responsePath, Object.assign(get(response, responsePath), this._data)); // merge response && current model
+        if (name === 'update') set(response, responsePath, Object.assign(get(response, responsePath), this._data)); // merge response &amp;&amp; current model
         return parseResponse.call(this, response);
       // eslint-disable-next-line no-else-return
       } else {
@@ -308,7 +365,7 @@ export default class CreateModel {
   }
 
   __fieldsAll(fields) {
-    return isArray(fields) && fields.length ? fields : keys(this._data);
+    return isArray(fields) &amp;&amp; fields.length ? fields : keys(this._data);
   }
 
   /**
@@ -358,7 +415,7 @@ export default class CreateModel {
    *   console.log('loading state', PersonModel.loading) // for your app
    * })
    *
-   * // Get response information && string params to request
+   * // Get response information &amp;&amp; string params to request
    * PersonModel.list({ foo: 'bar' }, response => {
    *   console.log('response', response)
    * }).then(res => {
@@ -525,3 +582,33 @@ export default class CreateModel {
     return this.__method('update', extend(getPlainObject({ id: this._data.id }), patch), cb);
   }
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<footer>
+    <img class="logo" src="img/toast-ui.png" style="">
+    <div class="footer-text">NHN Entertainment. Frontend Development Lab</div>
+</footer>
+<script>prettyPrint();</script>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/tui-doc.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+    <script>
+        var id = '_sub'.replace(/"/g, '_');
+        var selectedApi = document.getElementById(id); // do not use jquery selector
+        var $selectedApi = $(selectedApi);
+
+        $selectedApi.removeClass('hidden');
+        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        showLnbApi();
+    </script>
+
+</body>
+</html>
