@@ -1,4 +1,4 @@
 import '../scss/styles.scss';
 
-export { default as Model } from './Model';
+export { default as CreateModel } from './CreateModel';
 export { default as Utils } from './utils';

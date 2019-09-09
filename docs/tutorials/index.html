@@ -176,14 +176,14 @@
             }
 
             document.getElementById('js-handle-list').addEventListener('click', () => {
-              PersonModel.list().then(res => {
+              PersonModel.list({foo: 'bar'}).then(res => {
                 console.log('list', res)
                 inner(res)
               })
             });
 
             document.getElementById('js-handle-get').addEventListener('click', () => {
-              PersonModel.get({ id: 4 }).then(res => {
+              PersonModel.get({ id: 4, foo: 'bar' }).then(res => {
                 console.log('get', res)
                 inner(res)
               })

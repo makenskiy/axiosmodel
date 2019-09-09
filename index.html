@@ -105,9 +105,8 @@
             };
 
             class PersonModel extends CreateModel {
-              constructor(data = {}) {
-                super();
-                this._data = data;
+              constructor(data) {
+                super(data);
               }
 
               static get _opts() {
@@ -188,6 +187,7 @@
                 inner(res)
               })
             });
+            let model = new PersonModel()
 
             document.getElementById('js-handle-update').addEventListener('click', () => {
               let model = new PersonModel(DEMO_USER)

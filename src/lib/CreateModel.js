@@ -10,7 +10,8 @@ import {
   keys,
   pick,
   each,
-  unset
+  unset,
+  set
 } from 'lodash';
 
 import axios from 'axios';
@@ -84,9 +85,8 @@ function parseResponse(response) {
  * };
  *
  * class PersonModel extends CreateModel {
- *   constructor(data = {}) {
- *     super();
- *     this._data = data;
+ *   constructor(data) {
+ *     super(data);
  *   }
  *
  *   static get _opts() {
@@ -118,6 +118,11 @@ function parseResponse(response) {
  * // Method add/remove headers. @see {@link headers} for further information.
  */
 export default class CreateModel {
+  constructor(data) {
+    this._data = data || this.__class.properties;
+    ModelDataHandler.bind(this)(this._data);
+  }
+
   static get __class() {
     return this;
   }
@@ -218,6 +223,7 @@ export default class CreateModel {
             data: parse.query,
             ...parse.config
           }).then((res) => {
+            res.data.id = arg.id || arg._id;
             resolve({
               ...res,
               data: {
@@ -269,19 +275,14 @@ export default class CreateModel {
    */
   static __method(name, ...args) {
     const cb = last(args);
-    const opts = this.__class.__options;
-    const methodExtParams = get(opts, 'params', {})[name];
-
-    if (opts && methodExtParams) {
-      const methodParams = args[0];
-      if (isPlainObject(methodParams)) extend(methodParams, methodExtParams);
-    }
+    const responsePath = this.__options ? this.__options.responsePath : this.__class.__options.responsePath;
 
     this.loading = true;
     return Promise.resolve(this.__resource[name](...args)).then((response) => {
       if (isFunction(cb)) cb(response);
       this.loading = false;
       if (find([200, 201], (item) => item === response.status)) {
+        if (name === 'update') set(response, responsePath, Object.assign(get(response, responsePath), this._data)); // merge response && current model
         return parseResponse.call(this, response);
       // eslint-disable-next-line no-else-return
       } else {
@@ -383,6 +384,7 @@ export default class CreateModel {
    * @param {boolean} status - add Cache-Control or delete
    * @returns {@link CreateModel} - CreateModel this
    * @example
+   * // WARNING: Add global config
    * PersonModel.cache().get({ id: 1 }).then(res => {
    *   console.log('cache', res)
    *   PersonModel.cache(true)
@@ -438,6 +440,8 @@ export default class CreateModel {
    * let model = new PersonModel()
    *
    * // Example create 1
+   * model.first_name = 'asdasdsd'
+   * // or
    * model._data.first_name = 'asdasdsd'
    *
    * model.create().then(res => {
@@ -454,14 +458,15 @@ export default class CreateModel {
    * // Example create 3 (only first_name)
    * model.create({
    *  first_name: 'asdasdsd',
-   *  last_name: 'asdasdsd'
+   *  last_name: 'asdasdsd',
+   *  foo: 'bar'
    * }, ['first_name']).then(res => {
    *   console.log('create', res)
    * })
    */
   create(params = {}, fields, cb) {
     const query = Object.assign(params, this._data);
-    const patch = Object.assign(this.__class.properties, pick(query, this.__fieldsAll(fields)));
+    const patch = pick(query, this.__fieldsAll(fields));
     return this.__method('create', patch, cb);
   }
 
@@ -518,6 +523,12 @@ export default class CreateModel {
    */
   update(params = this._data, fields, cb) {
     const patch = pick(this._data, this.__fieldsAll(fields));
-    return this.__method('update', extend(getPlainObject({ id: this._data.id }), getPlainObject(params)), patch, cb);
+    return this.__method('update', extend(getPlainObject({ id: this._data.id }), patch), cb);
+  }
+
+  update1(params = {}, fields, cb) {
+    const query = Object.assign(params, this._data);
+    const patch = pick(query, this.__fieldsAll(fields));
+    return this.__method('create', patch, cb);
   }
 }

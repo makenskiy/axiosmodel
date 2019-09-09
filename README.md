@@ -1,7 +1,7 @@
 
 # Axios Model
 
-Create model base [axios](https://github.com/axios/axios). 
+Create model base [axios](https://github.com/axios/axios).
 Wrap class your response for get/set fields and CRUD operations (REST API).
 
 ## feature
@@ -52,9 +52,8 @@ const  PARAMS  = {
 
 // Create model class
 class  PersonModel extends CreateModel {
-    constructor(data = {}) {
-    	super();
-    	this._data = data; // required
+    constructor(data) {
+    	super(data);
     }
 
     // required
@@ -90,3 +89,33 @@ Example. Get array response. See documentation for use more methods
 ## Documentation
 
 [makenskiy.github.io/axiosmodel](https://makenskiy.github.io/axiosmodel/)
+
+# Development
+
+Development use
+
+## Install
+
+```bash
+git clone https://github.com/makenskiy/axiosmodel.git && cd axiosmodel && npm i
+```
+
+## Run dev
+```bash
+npm run dev
+```
+
+## Run build
+```bash
+npm run build
+```
+
+## Run test
+```bash
+npm run test
+```
+
+## Generate documentation
+```bash
+npm run jsdoc
+```
