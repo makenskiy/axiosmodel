@@ -9,5 +9,5 @@ publish () {
   fi
 }
 
-webpack --mode production && cp dist/index.html tutorials/index.html && cp dist/index.js tutorials/index.js && npm run jsdoc && publish
+npm run unit:single && webpack --mode production && cp dist/index.html tutorials/index.html && cp dist/index.js tutorials/index.js && npm run jsdoc && publish
 
