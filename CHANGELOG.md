@@ -1,4 +1,4 @@
-#### Структура CHANGELOG:
+#### Example CHANGELOG:
 
 -   Release version
 -   Backwards compatibility
@@ -66,6 +66,7 @@ class  PersonModel extends CreateModel {
 - Add unit tests for interface model
 - Add coverage
 - Auto add "id" if response have`t return "id" after update
+- Merge _data
 
 **Changes**
 - Add git tags release

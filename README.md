@@ -4,7 +4,7 @@
 Create model base [axios](https://github.com/axios/axios).
 Wrap class your response for get/set fields and CRUD operations (REST API).
 
-## feature
+## Feature
 
  - Wrap class your response
  - Get/Set custom fields
@@ -15,7 +15,7 @@ Wrap class your response for get/set fields and CRUD operations (REST API).
  - Method list (GET)
  - Method get (GET)
  - Method Get/Set custom request headers
-- Method cache (Cache-Control)
+ - Method cache (Cache-Control)
 
 ## Install
 
@@ -27,7 +27,7 @@ npm i @makenskiy/axiosmodel
 
 | Name  | Type | Required | Description
 | ------------- | ------------- | ------------- | ------------- |
-| generateProperty  | Boolean  | No  | Auto generation properties base "_data"  |
+| generateProperty  | Boolean  | No  | Auto generation properties base original data (_data property)  |
 | base  | String   | Yes  | API domain  |
 | path  | String   | Yes  | API Endpoint  |
 | properties  | Object   | No  |  Default properties model |
@@ -67,16 +67,16 @@ class  PersonModel extends CreateModel {
     }
 
     set name({first_name, last_name}) {
-			this._data.first_name = first_name;
-			this._data.last_name = last_name;
-		}
+		this._data.first_name = first_name;
+		this._data.last_name = last_name;
+	}
 };
 ```
 
 Example. Get array response. See documentation for use more methods
 
 ```js
- // GET https://reqres.in/api/users?foo=bar
+ // GET https://reqres.in/api/users?foo=bar&per-page=25
   PersonModel.list({ foo: 'bar' }).then(res => {
     console.log('list', res)
   }, err => {
@@ -86,13 +86,57 @@ Example. Get array response. See documentation for use more methods
   })
 ```
 
+Example return
+```js
+[
+    {
+        // original data
+        "_data": {
+            "id": 1,
+            "email": "makenskiy@gmail.com",
+            "first_name": "Victor",
+            "last_name": "Makenskiy",
+            "avatar": null
+        },
+        
+        // CRUD methods by instance
+        "_proto_": {
+            "delete": "(arg) => (Promise)",
+            "update": "(arg) => (Promise)",
+            "create": "(arg) => (Promise)"
+        },
+        
+        // Getters && setters
+        "get id": 1,
+        "set id": "(val) => {...}",
+        "get email": "makenskiy@gmail.com",
+        "set email": "(val) => {...}",
+        "get first_name": "Victor",
+        "set first_name": "(val) => {...}",
+        "get last_name": "Makenskiy",
+        "set last_name": "(val) => {...}",
+        "get avatar": "-",
+        "set avatar": "(val) => {...}",
+        "get name": "Victor Makenskiy",
+        "set name": "(val) => {...}",
+    }
+]
+```
+
+Example your html. Render after load.
+
+| name  | first_name | last_name | email | avatar | edit button | delete button | add button |
+| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
+| Victor Makenskiy  | Victor  | Makenskiy  | makenskiy@gmail.com  |  -  | call update()  | call delete()  | create new empty instance && call create()  |
+
+
 ## Documentation
 
 [makenskiy.github.io/axiosmodel](https://makenskiy.github.io/axiosmodel/)
 
 # Development
 
-Development use
+Use development tools
 
 ## Install
 
