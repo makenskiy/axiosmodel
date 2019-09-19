@@ -21,6 +21,9 @@ Wrap class your response for get/set fields and CRUD operations (REST API).
 
 ```bash
 npm i @makenskiy/axiosmodel
+
+// or
+yarn add @makenskiy/axiosmodel
 ```
 
 ## Params setting

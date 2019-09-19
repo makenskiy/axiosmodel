@@ -67,7 +67,7 @@
         <article class="readme"><h1>Axios Model</h1>
 <p>Create model base <a href="https://github.com/axios/axios">axios</a>.<br>
 Wrap class your response for get/set fields and CRUD operations (REST API).</p>
-<h2>feature</h2>
+<h2>Feature</h2>
 <ul>
 <li>Wrap class your response</li>
 <li>Get/Set custom fields</li>
@@ -98,7 +98,7 @@ Wrap class your response for get/set fields and CRUD operations (REST API).</p>
 <td>generateProperty</td>
 <td>Boolean</td>
 <td>No</td>
-<td>Auto generation properties base &quot;_data&quot;</td>
+<td>Auto generation properties base original data (_data property)</td>
 </tr>
 <tr>
 <td>base</td>
@@ -153,13 +153,13 @@ class  PersonModel extends CreateModel {
     }
 
     set name({first_name, last_name}) {
-			this._data.first_name = first_name;
-			this._data.last_name = last_name;
-		}
+		this._data.first_name = first_name;
+		this._data.last_name = last_name;
+	}
 };
 </code></pre>
 <p>Example. Get array response. See documentation for use more methods</p>
-<pre class="prettyprint source lang-js"><code> // GET https://reqres.in/api/users?foo=bar
+<pre class="prettyprint source lang-js"><code> // GET https://reqres.in/api/users?foo=bar&per-page=25
   PersonModel.list({ foo: 'bar' }).then(res => {
     console.log('list', res)
   }, err => {
@@ -168,10 +168,72 @@ class  PersonModel extends CreateModel {
     console.log('loading state', PersonModel.loading) // for your app
   })
 </code></pre>
+<p>Example return</p>
+<pre class="prettyprint source lang-js"><code>[
+    {
+        // original data
+        &quot;_data&quot;: {
+            &quot;id&quot;: 1,
+            &quot;email&quot;: &quot;makenskiy@gmail.com&quot;,
+            &quot;first_name&quot;: &quot;Victor&quot;,
+            &quot;last_name&quot;: &quot;Makenskiy&quot;,
+            &quot;avatar&quot;: null
+        },
+        
+        // CRUD methods by instance
+        &quot;_proto_&quot;: {
+            &quot;delete&quot;: &quot;(arg) => (Promise)&quot;,
+            &quot;update&quot;: &quot;(arg) => (Promise)&quot;,
+            &quot;create&quot;: &quot;(arg) => (Promise)&quot;
+        },
+        
+        // Getters && setters
+        &quot;get id&quot;: 1,
+        &quot;set id&quot;: &quot;(val) => {...}&quot;,
+        &quot;get email&quot;: &quot;makenskiy@gmail.com&quot;,
+        &quot;set email&quot;: &quot;(val) => {...}&quot;,
+        &quot;get first_name&quot;: &quot;Victor&quot;,
+        &quot;set first_name&quot;: &quot;(val) => {...}&quot;,
+        &quot;get last_name&quot;: &quot;Makenskiy&quot;,
+        &quot;set last_name&quot;: &quot;(val) => {...}&quot;,
+        &quot;get avatar&quot;: &quot;-&quot;,
+        &quot;set avatar&quot;: &quot;(val) => {...}&quot;,
+        &quot;get name&quot;: &quot;Victor Makenskiy&quot;,
+        &quot;set name&quot;: &quot;(val) => {...}&quot;,
+    }
+]
+</code></pre>
+<p>Example your html. Render after load.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>first_name</th>
+<th>last_name</th>
+<th>email</th>
+<th>avatar</th>
+<th>edit button</th>
+<th>delete button</th>
+<th>add button</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Victor Makenskiy</td>
+<td>Victor</td>
+<td>Makenskiy</td>
+<td>makenskiy@gmail.com</td>
+<td>-</td>
+<td>call update()</td>
+<td>call delete()</td>
+<td>create new empty instance &amp;&amp; call create()</td>
+</tr>
+</tbody>
+</table>
 <h2>Documentation</h2>
 <p><a href="https://makenskiy.github.io/axiosmodel/">makenskiy.github.io/axiosmodel</a></p>
 <h1>Development</h1>
-<p>Development use</p>
+<p>Use development tools</p>
 <h2>Install</h2>
 <pre class="prettyprint source lang-bash"><code>git clone https://github.com/makenskiy/axiosmodel.git && cd axiosmodel && npm i
 </code></pre>
