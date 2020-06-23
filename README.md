@@ -34,6 +34,7 @@ yarn add @makenskiy/axiosmodel
 | base  | String   | Yes  | API domain  |
 | path  | String   | Yes  | API Endpoint  |
 | properties  | Object   | No  |  Default properties model |
+| responsePath  | String   | No  |  Path to response data. Default 'data.data' |
 
 ## Include you project
 
