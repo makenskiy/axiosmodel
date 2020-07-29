@@ -8,12 +8,12 @@ import { each } from 'lodash';
 
 export default function (fields = {}) {
   each(fields, (value, key) => {
-    if (!Object.getOwnPropertyDescriptor(this, key)) {
+    if (!this.__lookupGetter__(key)) {
       Object.defineProperty(this, key, {
-        get() {
-          return (typeof (this._data[key]) === 'undefined' || this._data[key] === null) ? '–' : this._data[key];
+        get: () => {
+          return typeof this._data[key] === 'undefined' || this._data[key] === null ? '–' : this._data[key];
         },
-        set(val) {
+        set: (val) => {
           this._data[key] = val;
         },
         configurable: true
