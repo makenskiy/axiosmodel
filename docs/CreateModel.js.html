@@ -533,7 +533,12 @@ export default class CreateModel {
    * @returns {promise}
    */
   delete(cb) {
-    return this.__method('delete', { id: this._data.id }, cb);
+    const id = this._data.id || this._data._id;
+    if (!id) {
+      return Promise.reject(new Error('id not found'));
+    }
+
+    return this.__method('delete', { id }, cb);
   }
 
   /**
