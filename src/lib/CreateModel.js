@@ -216,7 +216,7 @@ export default class CreateModel {
       update: (arg) => {
         const parse = parseQuery(arg);
         return new Promise((resolve, reject) => {
-          axios({
+          return axios({
             method: 'PUT',
             url: `${url}/${arg.id || arg._id || ''}`,
             data: parse.query,
@@ -281,7 +281,9 @@ export default class CreateModel {
       if (isFunction(cb)) cb(response);
       this.loading = false;
       if (find([200, 201], (item) => item === response.status)) {
-        if (name === 'update') set(response, responsePath, Object.assign(get(response, responsePath), this._data)); // merge response && current model
+        if (name === 'update') {
+          set(response, responsePath, Object.assign(this._data, get(response, responsePath) || {})); // merge response && current model
+        }
         return parseResponse.call(this, response);
       // eslint-disable-next-line no-else-return
       } else {
@@ -527,6 +529,6 @@ export default class CreateModel {
    */
   update(params = this._data, fields, cb) {
     const patch = pick(params, this.__fieldsAll(fields));
-    return this.__method('update', extend(getPlainObject({ id: this._data.id }), patch), cb);
+    return this.__method('update', extend(getPlainObject({ id: this._data.id || this._data._id }), patch), cb);
   }
 }

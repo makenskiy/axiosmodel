@@ -1,6 +1,6 @@
 {
   "name": "@makenskiy/axiosmodel",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Axios model",
   "main": "dist/index.js",
   "scripts": {
