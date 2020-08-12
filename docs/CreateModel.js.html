@@ -67,7 +67,8 @@
   pick,
   each,
   unset,
-  set
+  set,
+  cloneDeep
 } from 'lodash';
 
 import axios from 'axios';
@@ -175,7 +176,7 @@ function parseResponse(response) {
  */
 export default class CreateModel {
   constructor(data) {
-    this._data = data || this.__class.properties;
+    this._data = data || cloneDeep(this.__class.properties);
     ModelDataHandler.bind(this)(this._data);
   }
 
@@ -351,7 +352,7 @@ export default class CreateModel {
 
   static get __options() {
     // eslint-disable-next-line no-return-assign
-    return OPTIONS[this.name] || (OPTIONS[this.name] = extend({}, DEFAULTS, this._opts));
+    return OPTIONS[this.name] || (OPTIONS[this.name] = extend({}, DEFAULTS, cloneDeep(this._opts)));
   }
 
   get __class() {
@@ -523,7 +524,7 @@ export default class CreateModel {
    * })
    */
   create(params = {}, fields, cb) {
-    const query = Object.assign(params, this._data);
+    const query = Object.assign(this._data, params);
     const patch = pick(query, this.__fieldsAll(fields));
     return this.__method('create', patch, cb);
   }

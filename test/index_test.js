@@ -144,7 +144,7 @@ describe('Check CRUD && other public methods', () => {
     });
   });
 
-  describe('GET create()', () => {
+  describe('POST create()', () => {
     it('create example 1', (done) => {
       let loading = true;
       let model1 = new PersonModel();
@@ -237,7 +237,7 @@ describe('Check CRUD && other public methods', () => {
           throw new Error('Error: create foo property');
         }
 
-        if (_.get(res, '_data.first_name') !== 'first_name') {
+        if (_.get(res, '_data.first_name') !== 'asdasdsd') {
           throw new Error('Error first_name property');
         }
 
